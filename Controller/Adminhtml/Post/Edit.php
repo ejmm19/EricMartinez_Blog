@@ -4,6 +4,7 @@ namespace EricMartinez\Blog\Controller\Adminhtml\Post;
 use Magento\Backend\App\Action;
 use Magento\Framework\View\Result\PageFactory;
 use EricMartinez\Blog\Model\PostFactory;
+use EricMartinez\Blog\Api\PostRepositoryInterface;
 use Magento\Framework\Registry;
 
 class Edit extends Action
@@ -19,6 +20,11 @@ class Edit extends Action
     protected $postFactory;
 
     /**
+     * @var PostRepositoryInterface
+     */
+    protected $postRepository;
+
+    /**
      * @var Registry
      */
     protected $registry;
@@ -27,18 +33,21 @@ class Edit extends Action
      * @param Action\Context $context
      * @param PageFactory $resultPageFactory
      * @param PostFactory $postFactory
+     * @param PostRepositoryInterface $postRepository
      * @param Registry $registry
      */
     public function __construct(
         Action\Context $context,
         PageFactory $resultPageFactory,
         PostFactory $postFactory,
+        PostRepositoryInterface $postRepository,
         Registry $registry
     )
     {
         parent::__construct($context);
         $this->resultPageFactory = $resultPageFactory;
         $this->postFactory = $postFactory;
+        $this->postRepository = $postRepository;
         $this->registry = $registry;
     }
 
@@ -51,8 +60,9 @@ class Edit extends Action
         $model = $this->postFactory->create();
 
         if ($id) {
-            $model->load($id);
-            if (!$model->getId()) {
+            try {
+                $model = $this->postRepository->getById($id);
+            } catch (\Magento\Framework\Exception\NoSuchEntityException $e) {
                 $this->messageManager->addErrorMessage(__('This post no longer exists.'));
                 /** @var \Magento\Backend\Model\View\Result\Redirect $resultRedirect */
                 $resultRedirect = $this->resultRedirectFactory->create();

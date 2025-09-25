@@ -3,40 +3,37 @@ namespace EricMartinez\Blog\Controller\Adminhtml\Post;
 
 use Magento\Backend\App\Action;
 use EricMartinez\Blog\Model\PostFactory;
+use EricMartinez\Blog\Api\PostRepositoryInterface;
+use EricMartinez\Blog\Model\ImageUploader;
 use Magento\Framework\App\Request\DataPersistorInterface;
 use Magento\Framework\Exception\LocalizedException;
+use Magento\Backend\Model\Auth\Session as AuthSession;
 
 class Save extends Action
 {
-    /**
-     * @var PostFactory
-     */
-    protected $postFactory;
+    protected PostFactory $postFactory;
+    protected DataPersistorInterface $dataPersistor;
+    protected AuthSession $authSession;
+    protected PostRepositoryInterface $postRepository;
+    protected ImageUploader $imageUploader;
 
-    /**
-     * @var DataPersistorInterface
-     */
-    protected $dataPersistor;
-
-    /**
-     * @param Action\Context $context
-     * @param PostFactory $postFactory
-     * @param DataPersistorInterface $dataPersistor
-     */
     public function __construct(
         Action\Context $context,
         PostFactory $postFactory,
-        DataPersistorInterface $dataPersistor
+        PostRepositoryInterface $postRepository,
+        DataPersistorInterface $dataPersistor,
+        AuthSession $authSession,
+        ImageUploader $imageUploader
     )
     {
         parent::__construct($context);
         $this->postFactory = $postFactory;
+        $this->postRepository = $postRepository;
         $this->dataPersistor = $dataPersistor;
+        $this->authSession = $authSession;
+        $this->imageUploader = $imageUploader;
     }
 
-    /**
-     * @return \Magento\Framework\Controller\Result\Redirect
-     */
     public function execute()
     {
         /** @var \Magento\Backend\Model\View\Result\Redirect $resultRedirect */
@@ -44,16 +41,34 @@ class Save extends Action
         $data = $this->getRequest()->getPostValue();
         if ($data) {
             $id = $this->getRequest()->getParam('post_id');
-            $model = $this->postFactory->create()->load($id);
-            if (!$model->getId() && $id) {
-                $this->messageManager->addErrorMessage(__('This post no longer exists.'));
-                return $resultRedirect->setPath('*/*/');
+
+            if (empty($id)) {
+                $model = $this->postFactory->create();
+            } else {
+                try {
+                    $model = $this->postRepository->getById($id);
+                } catch (LocalizedException $e) {
+                    $this->messageManager->addErrorMessage(__('This post no longer exists.'));
+                    return $resultRedirect->setPath('*/*/');
+                }
+            }
+
+            if (isset($data['cover_image'][0]['name'])) {
+                $data['cover_image'] = $this->imageUploader->moveFileFromTmp($data['cover_image'][0]['name']);
+            } elseif (isset($data['cover_image'][0]['url'])) {
+                $data['cover_image'] = basename($data['cover_image'][0]['url']);
+            } else {
+                $data['cover_image'] = null;
+            }
+
+            if (!$model->getId()) {
+                $data['admin_user_id'] = $this->authSession->getUser()->getId();
             }
 
             $model->setData($data);
 
             try {
-                $model->save();
+                $this->postRepository->save($model);
                 $this->messageManager->addSuccessMessage(__('You saved the post.'));
                 $this->dataPersistor->clear('blog_post');
 

@@ -70,6 +70,19 @@
                 </item>
             </argument>
         </field>
+        <field name="cover_image">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">string</item>
+                    <item name="label" xsi:type="string" translate="true">Cover Image</item>
+                    <item name="formElement" xsi:type="string">imageUploader</item>
+                    <item name="storeManager" xsi:type="object">Magento\Store\Model\StoreManagerInterface</item>
+                    <item name="uploaderConfig" xsi:type="array">
+                        <item name="url" xsi:type="url" path="blog/post/upload"/>
+                    </item>
+                </item>
+            </argument>
+        </field>
         <field name="content">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">

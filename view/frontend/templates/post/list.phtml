@@ -1,0 +1,29 @@
+<?php
+/**
+ * @var \EricMartinez\Blog\Block\Post\ListPost $block
+ */
+$posts = $block->getPosts();
+?>
+
+<?php if ($posts && $posts->count()): ?>
+    <div class="blog-posts-list">
+        <?php foreach ($posts as $post): ?>
+            <div class="post-card">
+                <?php if ($post->getCoverImage()): ?>
+                    <div class="post-image-container">
+                        <img class="post-image" src="<?php echo $block->getImageUrl($post->getCoverImage()); ?>" alt="<?php echo $block->escapeHtml($post->getTitle()); ?>">
+                    </div>
+                <?php endif; ?>
+                <div class="post-content">
+                    <h2 class="post-title">
+                        <?php echo $block->escapeHtml($post->getTitle()); ?>
+                    </h2>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </div>
+<?php else: ?>
+    <div class="message info empty">
+        <span><?php echo __('There are no posts yet.'); ?></span>
+    </div>
+<?php endif; ?>

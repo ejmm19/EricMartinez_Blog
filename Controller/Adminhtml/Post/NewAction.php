@@ -16,7 +16,7 @@ class NewAction extends Action
     /**
      * @return bool
      */
-    protected function _isAllowed()
+    protected function _isAllowed(): bool
     {
         return $this->_authorization->isAllowed('EricMartinez_Blog::post');
     }

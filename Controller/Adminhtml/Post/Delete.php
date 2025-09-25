@@ -2,26 +2,26 @@
 namespace EricMartinez\Blog\Controller\Adminhtml\Post;
 
 use Magento\Backend\App\Action;
-use EricMartinez\Blog\Model\PostFactory;
+use EricMartinez\Blog\Api\PostRepositoryInterface;
 
 class Delete extends Action
 {
     /**
-     * @var PostFactory
+     * @var PostRepositoryInterface
      */
-    protected $postFactory;
+    protected $postRepository;
 
     /**
      * @param Action\Context $context
-     * @param PostFactory $postFactory
+     * @param PostRepositoryInterface $postRepository
      */
     public function __construct(
         Action\Context $context,
-        PostFactory $postFactory
+        PostRepositoryInterface $postRepository
     )
     {
         parent::__construct($context);
-        $this->postFactory = $postFactory;
+        $this->postRepository = $postRepository;
     }
 
     /**
@@ -34,9 +34,7 @@ class Delete extends Action
         $id = $this->getRequest()->getParam('post_id');
         if ($id) {
             try {
-                $model = $this->postFactory->create();
-                $model->load($id);
-                $model->delete();
+                $this->postRepository->deleteById($id);
                 $this->messageManager->addSuccessMessage(__('You deleted the post.'));
                 return $resultRedirect->setPath('*/*/');
             } catch (\Exception $e) {

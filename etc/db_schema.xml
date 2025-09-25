@@ -6,6 +6,7 @@
                 comment="Post ID"/>
         <column xsi:type="varchar" name="title" length="255" nullable="false" comment="Post Title"/>
         <column xsi:type="text" name="content" nullable="false" comment="Post Content (supports WYSIWYG)"/>
+        <column xsi:type="varchar" name="cover_image" length="255" nullable="true" comment="Cover Image Path"/>
         <column xsi:type="smallint" name="is_active" padding="5" unsigned="true" nullable="false" identity="false"
                 default="1" comment="Is Post Active"/>
         <column xsi:type="int" name="customer_id" padding="10" unsigned="true" nullable="true" identity="false"
