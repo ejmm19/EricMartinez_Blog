@@ -28,24 +28,65 @@ class Post extends AbstractModel implements PostInterface
         return $this->setData(self::POST_ID, $id);
     }
 
-    public function getTitle()
+    /**
+     * {@inheritdoc}
+     */
+    public function getPostId(): ?int
+    {
+        return (int)$this->getData(self::POST_ID);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setPostId(int $postId): PostInterface
+    {
+        return $this->setData(self::POST_ID, $postId);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getTitle(): ?string
     {
         return $this->getData(self::TITLE);
     }
 
-    public function setTitle($title)
+    /**
+     * {@inheritdoc}
+     */
+    public function setTitle(string $title): PostInterface
     {
         return $this->setData(self::TITLE, $title);
     }
 
-    public function getContent()
+    /**
+     * {@inheritdoc}
+     */
+    public function getContent(): ?string
     {
         return $this->getData(self::CONTENT);
     }
 
-    public function setContent($content)
+    public function setContent(string $content): PostInterface
     {
         return $this->setData(self::CONTENT, $content);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCoverImage(): ?string
+    {
+        return $this->getData(self::COVER_IMAGE);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCoverImage(string $coverImage): PostInterface
+    {
+        return $this->setData(self::COVER_IMAGE, $coverImage);
     }
 
     public function getIsActive()
@@ -78,22 +119,34 @@ class Post extends AbstractModel implements PostInterface
         return $this->setData(self::ADMIN_USER_ID, $adminUserId);
     }
 
-    public function getCreatedAt()
+    /**
+     * {@inheritdoc}
+     */
+    public function getCreatedAt(): ?string
     {
         return $this->getData(self::CREATED_AT);
     }
 
-    public function setCreatedAt($createdAt)
+    /**
+     * {@inheritdoc}
+     */
+    public function setCreatedAt(string $createdAt): PostInterface
     {
         return $this->setData(self::CREATED_AT, $createdAt);
     }
 
-    public function getUpdatedAt()
+    /**
+     * {@inheritdoc}
+     */
+    public function getUpdatedAt(): ?string
     {
         return $this->getData(self::UPDATED_AT);
     }
 
-    public function setUpdatedAt($updatedAt)
+    /**
+     * {@inheritdoc}
+     */
+    public function setUpdatedAt(string $updatedAt): PostInterface
     {
         return $this->setData(self::UPDATED_AT, $updatedAt);
     }

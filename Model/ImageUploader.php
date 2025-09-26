@@ -17,20 +17,25 @@ class ImageUploader
     protected $filesystem;
     protected $storeManager;
     protected $uploaderFactory;
+    protected \Psr\Log\LoggerInterface $logger;
 
     public function __construct(
         Filesystem $filesystem,
         StoreManagerInterface $storeManager,
-        UploaderFactory $uploaderFactory
+        UploaderFactory $uploaderFactory,
+        \Psr\Log\LoggerInterface $logger
     )
     {
         $this->filesystem = $filesystem;
         $this->storeManager = $storeManager;
         $this->uploaderFactory = $uploaderFactory;
+        $this->logger = $logger;
     }
 
     public function saveFileToTmpDir($fileId)
     {
+        $this->logger->critical('Entering saveFileToTmpDir method.');
+        $this->logger->info('$_FILES content: ' . print_r($_FILES, true));
         $mediaDirectory = $this->filesystem->getDirectoryWrite(DirectoryList::MEDIA);
         $baseTmpPath = self::BASE_TMP_PATH;
 
@@ -39,7 +44,14 @@ class ImageUploader
         $uploader->setAllowedExtensions(self::ALLOWED_EXTENSIONS);
         $uploader->setAllowRenameFiles(true);
 
-        $result = $uploader->save($mediaDirectory->getAbsolutePath($baseTmpPath));
+        try {
+            $result = $uploader->save($mediaDirectory->getAbsolutePath($baseTmpPath));
+        } catch (\Exception $e) {
+            $this->logger->critical($e);
+            throw new LocalizedException(
+                __('File can not be saved to the temporary folder. Original error: %1', $e->getMessage())
+            );
+        }
 
         if (!$result) {
             throw new LocalizedException(
@@ -65,6 +77,7 @@ class ImageUploader
             $mediaDirectory = $this->filesystem->getDirectoryWrite(DirectoryList::MEDIA);
             $mediaDirectory->renameFile($baseTmpImagePath, $baseImagePath);
         } catch (LocalizedException $e) {
+            $this->logger->critical($e);
             throw new LocalizedException(
                 __('Could not move file from temporary directory to permanent directory.')
             );
