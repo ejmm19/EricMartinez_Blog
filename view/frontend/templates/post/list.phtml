@@ -6,20 +6,17 @@ $posts = $block->getPosts();
 ?>
 
 <?php if ($posts && $posts->count()): ?>
-    <div class="blog-posts-list">
+    <div class="posts-list-container">
         <?php foreach ($posts as $post): ?>
-            <div class="post-card">
-                <?php if ($post->getCoverImage()): ?>
-                    <div class="post-image-container">
-                        <img class="post-image" src="<?php echo $block->getImageUrl($post->getCoverImage()); ?>" alt="<?php echo $block->escapeHtml($post->getTitle()); ?>">
-                    </div>
-                <?php endif; ?>
-                <div class="post-content">
-                    <h2 class="post-title">
+            <a href="<?php echo $block->getUrl('blog/post/view', ['id' => $post->getId()]); ?>" class="post-card">
+                <div class="post-card__image" style="background-image: url('<?= ($post->getCoverImage()) ? $block->getImageUrl($post->getCoverImage()) : 'https://placehold.co/600x220' ?>');"></div>
+                <div class="post-card__content">
+                    <h2 class="post-card__title">
                         <?php echo $block->escapeHtml($post->getTitle()); ?>
                     </h2>
+                    <span class="post-card__read-more"><?php echo __('Read More'); ?> &rarr;</span>
                 </div>
-            </div>
+            </a>
         <?php endforeach; ?>
     </div>
 <?php else: ?>

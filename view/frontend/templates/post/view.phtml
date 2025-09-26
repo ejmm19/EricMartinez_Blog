@@ -1,0 +1,37 @@
+<?php
+/**
+ * @var \EricMartinez\Blog\Block\Post\View $block
+ */
+$post = $block->getCurrentPost();
+?>
+
+<?php if ($post && $post->getId()): ?>
+    <div class="post-detail-page">
+
+        <header class="post-detail__header">
+            <div class="post-detail__header-image" style="background-image: url('<?php echo $block->getImageUrl($post->getCoverImage() ?: 'https://placehold.co/1200x400'); ?>');"></div>
+            <div class="post-detail__header-overlay">
+                <h1 class="post-detail__title"><?php echo $block->escapeHtml($post->getTitle()); ?></h1>
+            </div>
+        </header>
+
+        <article class="post-detail__body">
+            <div class="post-detail__meta">
+                <span><?php echo __('Created: %1', $block->formatDate($post->getCreatedAt(), \IntlDateFormatter::LONG, false)); ?></span>
+                <?php if ($post->getUpdatedAt() && $post->getUpdatedAt() !== $post->getCreatedAt()): ?>
+                    <span class="meta-separator">|</span>
+                    <span><?php echo __('Updated: %1', $block->formatDate($post->getUpdatedAt(), \IntlDateFormatter::LONG, false)); ?></span>
+                <?php endif; ?>
+            </div>
+
+            <div class="post-detail__content">
+                <?php echo $block->filterContent($post->getContent()); ?>
+            </div>
+        </article>
+
+    </div>
+<?php else: ?>
+    <div class="message info empty">
+        <span><?php echo __('The requested post does not exist.'); ?></span>
+    </div>
+<?php endif; ?>
