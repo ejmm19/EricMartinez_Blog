@@ -13,17 +13,17 @@ class View implements HttpGetActionInterface
     /**
      * @var PageFactory
      */
-    protected $resultPageFactory;
+    protected PageFactory $resultPageFactory;
 
     /**
      * @var RequestInterface
      */
-    protected $request;
+    protected RequestInterface $request;
 
     /**
      * @var ResultFactory
      */
-    protected $resultFactory;
+    protected ResultFactory $resultFactory;
 
     /**
      * View constructor.

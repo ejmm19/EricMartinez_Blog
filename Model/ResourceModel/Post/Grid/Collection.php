@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace EricMartinez\Blog\Model\ResourceModel\Post\Grid;
 
 use Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult;

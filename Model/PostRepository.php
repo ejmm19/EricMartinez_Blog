@@ -15,11 +15,11 @@ use Magento\Framework\Exception\NoSuchEntityException;
 
 class PostRepository implements PostRepositoryInterface
 {
-    private $resource;
-    private $postFactory;
-    private $postCollectionFactory;
-    private $searchResultsFactory;
-    private $collectionProcessor;
+    private PostResource $resource;
+    private PostFactory $postFactory;
+    private PostCollectionFactory $postCollectionFactory;
+    private PostSearchResultsInterfaceFactory $searchResultsFactory;
+    private CollectionProcessorInterface $collectionProcessor;
 
     public function __construct(
         PostResource $resource,
