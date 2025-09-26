@@ -3,5 +3,6 @@
     <menu>
         <add id="EricMartinez_Blog::blog" title="Blog" module="EricMartinez_Blog" sortOrder="50" resource="EricMartinez_Blog::blog"/>
         <add id="EricMartinez_Blog::post" title="Posts" module="EricMartinez_Blog" sortOrder="10" parent="EricMartinez_Blog::blog" action="blog/post" resource="EricMartinez_Blog::post"/>
+        <add id="EricMartinez_Blog::comment" title="Comments" module="EricMartinez_Blog" sortOrder="20" parent="EricMartinez_Blog::blog" action="blog/comment" resource="EricMartinez_Blog::comment"/>
     </menu>
 </config>

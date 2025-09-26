@@ -1,0 +1,65 @@
+<?php
+/** @var \EricMartinez\Blog\Block\Post\Comments $block */
+$post = $block->getPost();
+$comments = $block->getComments();
+?>
+<?php if ($post): ?>
+    <div class="comments-wrapper post-detail__body">
+        <h2><?= __('Comments') ?></h2>
+        <?php if (count($comments) > 0): ?>
+            <ol class="comment-list">
+                <?php foreach ($comments as $comment): ?>
+                    <li class="comment-item">
+                        <p class="comment-content"><?= $block->escapeHtml($comment->getContent()) ?></p>
+                        <p class="comment-meta">
+                            <?php if ($comment->getCustomerId()): ?>
+                                <?php // You can add logic here to get customer name by ID ?>
+                                <span class="author"><?= __('A customer') ?></span>
+                            <?php else: ?>
+                                <span class="author"><?= $block->escapeHtml($comment->getGuestName()) ?></span>
+                            <?php endif; ?>
+                            <span class="date"><?= $block->formatDate($comment->getCreatedAt(), \IntlDateFormatter::LONG) ?></span>
+                        </p>
+                    </li>
+                <?php endforeach; ?>
+            </ol>
+        <?php else: ?>
+            <p><?= __('Be the first to comment on this post.') ?></p>
+        <?php endif; ?>
+
+        <h3><?= __('Leave a Reply') ?></h3>
+        <form class="form" action="<?= $block->getFormAction() ?>" method="post" data-mage-init='{"validation":{}}'>
+            <input type="hidden" name="post_id" value="<?= $post->getId() ?>">
+            <?= $block->getBlockHtml('formkey') ?>
+            <fieldset class="fieldset">
+                <?php if (!$block->isCustomerLoggedIn()): ?>
+                    <div class="field required">
+                        <label for="guest_name" class="label"><span><?= __('Name') ?></span></label>
+                        <div class="control">
+                            <input name="guest_name" id="guest_name" title="<?= __('Name') ?>" class="input-text" type="text" data-validate="{required:true}"/>
+                        </div>
+                    </div>
+                    <div class="field required">
+                        <label for="guest_email" class="label"><span><?= __('Email') ?></span></label>
+                        <div class="control">
+                            <input name="guest_email" id="guest_email" title="<?= __('Email') ?>" class="input-text" type="email" data-validate="{required:true, 'validate-email':true}"/>
+                        </div>
+                    </div>
+                <?php endif; ?>
+                <div class="field required">
+                    <label for="content" class="label"><span><?= __('Comment') ?></span></label>
+                    <div class="control">
+                        <textarea name="content" id="content" title="<?= __('Comment') ?>" class="input-text" cols="5" rows="3" data-validate="{required:true}"></textarea>
+                    </div>
+                </div>
+            </fieldset>
+            <div class="actions-toolbar">
+                <div class="primary">
+                    <button type="submit" title="<?= __('Submit Comment') ?>" class="action submit primary">
+                        <span><?= __('Submit Comment') ?></span>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+<?php endif; ?>

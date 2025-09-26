@@ -2,9 +2,10 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
     <acl>
         <resources>
-            <resource title="sss" id="Magento_Backend::admin">
+            <resource id="Magento_Backend::admin" title="Admin">
                 <resource id="EricMartinez_Blog::blog" title="Blog" sortOrder="50">
                     <resource id="EricMartinez_Blog::post" title="Posts" sortOrder="10" />
+                    <resource id="EricMartinez_Blog::comment" title="Comments" sortOrder="20" />
                 </resource>
             </resource>
         </resources>

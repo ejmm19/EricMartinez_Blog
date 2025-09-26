@@ -29,6 +29,8 @@ $post = $block->getCurrentPost();
             </div>
         </article>
 
+        <?= $block->getChildHtml('blog.post.comments') ?>
+
     </div>
 <?php else: ?>
     <div class="message info empty">

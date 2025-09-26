@@ -3,16 +3,26 @@
     <preference for="EricMartinez\Blog\Api\PostRepositoryInterface" type="EricMartinez\Blog\Model\PostRepository"/>
     <preference for="EricMartinez\Blog\Api\Data\PostInterface" type="EricMartinez\Blog\Model\Post"/>
     <preference for="EricMartinez\Blog\Api\Data\PostSearchResultsInterface" type="EricMartinez\Blog\Model\PostSearchResults"/>
+    <preference for="EricMartinez\Blog\Api\Data\CommentInterface" type="EricMartinez\Blog\Model\Comment"/>
+    <preference for="EricMartinez\Blog\Api\CommentRepositoryInterface" type="EricMartinez\Blog\Model\CommentRepository"/>
+    <preference for="EricMartinez\Blog\Api\Data\CommentSearchResultsInterface" type="EricMartinez\Blog\Model\CommentSearchResults"/>
     <virtualType name="EricMartinezBlogPostGridCollection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
         <arguments>
             <argument name="mainTable" xsi:type="string">ericmartinez_blog_post</argument>
             <argument name="resourceModel" xsi:type="string">EricMartinez\Blog\Model\ResourceModel\Post</argument>
         </arguments>
     </virtualType>
+    <virtualType name="EricMartinezBlogCommentGridCollection" type="EricMartinez\Blog\Model\ResourceModel\Comment\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">ericmartinez_blog_comment</argument>
+            <argument name="resourceModel" xsi:type="string">EricMartinez\Blog\Model\ResourceModel\Comment</argument>
+        </arguments>
+    </virtualType>
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
             <argument name="collections" xsi:type="array">
                 <item name="ericmartinez_blog_post_listing_data_source" xsi:type="string">EricMartinezBlogPostGridCollection</item>
+                <item name="ericmartinez_blog_comment_listing_data_source" xsi:type="string">EricMartinezBlogCommentGridCollection</item>
             </argument>
         </arguments>
     </type>

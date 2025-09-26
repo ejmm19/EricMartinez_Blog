@@ -5,7 +5,9 @@
     </head>
     <body>
         <referenceContainer name="content">
-            <block class="EricMartinez\Blog\Block\Post\View" name="blog_post_view" template="EricMartinez_Blog::post/view.phtml"/>
+            <block class="EricMartinez\Blog\Block\Post\View" name="blog_post_view" template="EricMartinez_Blog::post/view.phtml">
+                <block class="EricMartinez\Blog\Block\Post\Comments" name="blog.post.comments" template="EricMartinez_Blog::post/comments.phtml" />
+            </block>
         </referenceContainer>
     </body>
 </page>
