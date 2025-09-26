@@ -33,7 +33,8 @@ class Post extends AbstractModel implements PostInterface
      */
     public function getPostId(): ?int
     {
-        return (int)$this->getData(PostInterface::POST_ID);
+        $value = $this->getData(PostInterface::POST_ID);
+        return $value === null ? null : (int)$value;
     }
 
     /**
@@ -101,7 +102,8 @@ class Post extends AbstractModel implements PostInterface
 
     public function getCustomerId(): ?int
     {
-        return $this->getData(PostInterface::CUSTOMER_ID);
+        $value = $this->getData(PostInterface::CUSTOMER_ID);
+        return $value === null ? null : (int)$value;
     }
 
     public function setCustomerId(int $customerId): PostInterface
@@ -111,7 +113,8 @@ class Post extends AbstractModel implements PostInterface
 
     public function getAdminUserId(): ?int
     {
-        return $this->getData(PostInterface::ADMIN_USER_ID);
+        $value = $this->getData(PostInterface::ADMIN_USER_ID);
+        return $value === null ? null : (int)$value;
     }
 
     public function setAdminUserId(int $adminUserId): PostInterface
