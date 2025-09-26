@@ -2,7 +2,7 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <preference for="EricMartinez\Blog\Api\PostRepositoryInterface" type="EricMartinez\Blog\Model\PostRepository"/>
     <preference for="EricMartinez\Blog\Api\Data\PostInterface" type="EricMartinez\Blog\Model\Post"/>
-    <preference for="EricMartinez\Blog\Api\Data\PostSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+    <preference for="EricMartinez\Blog\Api\Data\PostSearchResultsInterface" type="EricMartinez\Blog\Model\PostSearchResults"/>
     <virtualType name="EricMartinezBlogPostGridCollection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
         <arguments>
             <argument name="mainTable" xsi:type="string">ericmartinez_blog_post</argument>

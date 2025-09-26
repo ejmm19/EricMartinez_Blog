@@ -45,6 +45,7 @@
                     <item name="resizeEnabled" xsi:type="boolean">false</item>
                     <item name="resizeDefaultWidth" xsi:type="string">55</item>
                     <item name="indexField" xsi:type="string">post_id</item>
+                    <item name="sortOrder" xsi:type="number">0</item>
                 </item>
             </argument>
         </selectionsColumn>
@@ -54,6 +55,18 @@
                     <item name="filter" xsi:type="string">textRange</item>
                     <item name="sorting" xsi:type="string">asc</item>
                     <item name="label" xsi:type="string" translate="true">ID</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                </item>
+            </argument>
+        </column>
+        <column name="cover_image" class="EricMartinez\Blog\Ui\Component\Listing\Column\ImageThumbnail">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/thumbnail</item>
+                    <item name="sortable" xsi:type="boolean">false</item>
+                    <item name="has_preview" xsi:type="string">1</item>
+                    <item name="label" xsi:type="string" translate="true">Cover Image</item>
+                    <item name="sortOrder" xsi:type="number">20</item>
                 </item>
             </argument>
         </column>
@@ -68,14 +81,16 @@
                         </item>
                     </item>
                     <item name="label" xsi:type="string" translate="true">Title</item>
+                    <item name="sortOrder" xsi:type="number">30</item>
                 </item>
             </argument>
         </column>
-        <column name="author">
+        <column name="author" class="EricMartinez\Blog\Ui\Component\Listing\Column\AuthorName">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="filter" xsi:type="string">text</item>
                     <item name="label" xsi:type="string" translate="true">Author</item>
+                    <item name="sortOrder" xsi:type="number">40</item>
                 </item>
             </argument>
         </column>
@@ -86,6 +101,7 @@
                     <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/date</item>
                     <item name="dataType" xsi:type="string">date</item>
                     <item name="label" xsi:type="string" translate="true">Created</item>
+                    <item name="sortOrder" xsi:type="number">50</item>
                 </item>
             </argument>
         </column>
@@ -96,6 +112,7 @@
                     <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/date</item>
                     <item name="dataType" xsi:type="string">date</item>
                     <item name="label" xsi:type="string" translate="true">Modified</item>
+                    <item name="sortOrder" xsi:type="number">60</item>
                 </item>
             </argument>
         </column>

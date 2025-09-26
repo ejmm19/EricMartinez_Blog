@@ -11,6 +11,10 @@ interface PostInterface
     const COVER_IMAGE = 'cover_image';
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
+    const URL_KEY = 'url_key';
+    const IS_ACTIVE = 'is_active';
+    const CUSTOMER_ID = 'customer_id';
+    const ADMIN_USER_ID = 'admin_user_id';
 
     /**
      * Get post ID.
@@ -101,4 +105,64 @@ interface PostInterface
      * @return \EricMartinez\Blog\Api\Data\PostInterface
      */
     public function setUpdatedAt(string $updatedAt): PostInterface;
+
+    /**
+     * Get URL Key.
+     *
+     * @return string|null
+     */
+    public function getUrlKey(): ?string;
+
+    /**
+     * Set URL Key.
+     *
+     * @param string $urlKey
+     * @return \EricMartinez\Blog\Api\Data\PostInterface
+     */
+    public function setUrlKey(string $urlKey): PostInterface;
+
+    /**
+     * Get is active.
+     *
+     * @return bool|null
+     */
+    public function getIsActive(): ?bool;
+
+    /**
+     * Set is active.
+     *
+     * @param bool $isActive
+     * @return \EricMartinez\Blog\Api\Data\PostInterface
+     */
+    public function setIsActive(bool $isActive): PostInterface;
+
+    /**
+     * Get customer ID.
+     *
+     * @return int|null
+     */
+    public function getCustomerId(): ?int;
+
+    /**
+     * Set customer ID.
+     *
+     * @param int $customerId
+     * @return \EricMartinez\Blog\Api\Data\PostInterface
+     */
+    public function setCustomerId(int $customerId): PostInterface;
+
+    /**
+     * Get admin user ID.
+     *
+     * @return int|null
+     */
+    public function getAdminUserId(): ?int;
+
+    /**
+     * Set admin user ID.
+     *
+     * @param int $adminUserId
+     * @return \EricMartinez\Blog\Api\Data\PostInterface
+     */
+    public function setAdminUserId(int $adminUserId): PostInterface;
 }

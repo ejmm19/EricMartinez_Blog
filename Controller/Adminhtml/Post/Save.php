@@ -53,8 +53,10 @@ class Save extends Action
                 }
             }
 
-            if (isset($data['cover_image'][0]['name'])) {
+            if (isset($data['cover_image'][0]['name']) && isset($data['cover_image'][0]['tmp_name'])) {
                 $data['cover_image'] = $this->imageUploader->moveFileFromTmp($data['cover_image'][0]['name']);
+            } elseif (isset($data['cover_image'][0]['name']) && !isset($data['cover_image'][0]['tmp_name'])) {
+                $data['cover_image'] = $data['cover_image'][0]['name'];
             } elseif (isset($data['cover_image'][0]['url'])) {
                 $data['cover_image'] = basename($data['cover_image'][0]['url']);
             } else {

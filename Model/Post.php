@@ -20,12 +20,12 @@ class Post extends AbstractModel implements PostInterface
 
     public function getId()
     {
-        return $this->getData(self::POST_ID);
+        return $this->getData(PostInterface::POST_ID);
     }
 
     public function setId($id)
     {
-        return $this->setData(self::POST_ID, $id);
+        return $this->setData(PostInterface::POST_ID, $id);
     }
 
     /**
@@ -33,7 +33,7 @@ class Post extends AbstractModel implements PostInterface
      */
     public function getPostId(): ?int
     {
-        return (int)$this->getData(self::POST_ID);
+        return (int)$this->getData(PostInterface::POST_ID);
     }
 
     /**
@@ -41,7 +41,7 @@ class Post extends AbstractModel implements PostInterface
      */
     public function setPostId(int $postId): PostInterface
     {
-        return $this->setData(self::POST_ID, $postId);
+        return $this->setData(PostInterface::POST_ID, $postId);
     }
 
     /**
@@ -49,7 +49,7 @@ class Post extends AbstractModel implements PostInterface
      */
     public function getTitle(): ?string
     {
-        return $this->getData(self::TITLE);
+        return $this->getData(PostInterface::TITLE);
     }
 
     /**
@@ -57,7 +57,7 @@ class Post extends AbstractModel implements PostInterface
      */
     public function setTitle(string $title): PostInterface
     {
-        return $this->setData(self::TITLE, $title);
+        return $this->setData(PostInterface::TITLE, $title);
     }
 
     /**
@@ -65,12 +65,12 @@ class Post extends AbstractModel implements PostInterface
      */
     public function getContent(): ?string
     {
-        return $this->getData(self::CONTENT);
+        return $this->getData(PostInterface::CONTENT);
     }
 
     public function setContent(string $content): PostInterface
     {
-        return $this->setData(self::CONTENT, $content);
+        return $this->setData(PostInterface::CONTENT, $content);
     }
 
     /**
@@ -78,7 +78,7 @@ class Post extends AbstractModel implements PostInterface
      */
     public function getCoverImage(): ?string
     {
-        return $this->getData(self::COVER_IMAGE);
+        return $this->getData(PostInterface::COVER_IMAGE);
     }
 
     /**
@@ -86,37 +86,37 @@ class Post extends AbstractModel implements PostInterface
      */
     public function setCoverImage(string $coverImage): PostInterface
     {
-        return $this->setData(self::COVER_IMAGE, $coverImage);
+        return $this->setData(PostInterface::COVER_IMAGE, $coverImage);
     }
 
-    public function getIsActive()
+    public function getIsActive(): ?bool
     {
-        return (bool)$this->getData(self::IS_ACTIVE);
+        return (bool)$this->getData(PostInterface::IS_ACTIVE);
     }
 
-    public function setIsActive($isActive)
+    public function setIsActive(bool $isActive): PostInterface
     {
-        return $this->setData(self::IS_ACTIVE, $isActive);
+        return $this->setData(PostInterface::IS_ACTIVE, $isActive);
     }
 
-    public function getCustomerId()
+    public function getCustomerId(): ?int
     {
-        return $this->getData(self::CUSTOMER_ID);
+        return $this->getData(PostInterface::CUSTOMER_ID);
     }
 
-    public function setCustomerId($customerId)
+    public function setCustomerId(int $customerId): PostInterface
     {
-        return $this->setData(self::CUSTOMER_ID, $customerId);
+        return $this->setData(PostInterface::CUSTOMER_ID, $customerId);
     }
 
-    public function getAdminUserId()
+    public function getAdminUserId(): ?int
     {
-        return $this->getData(self::ADMIN_USER_ID);
+        return $this->getData(PostInterface::ADMIN_USER_ID);
     }
 
-    public function setAdminUserId($adminUserId)
+    public function setAdminUserId(int $adminUserId): PostInterface
     {
-        return $this->setData(self::ADMIN_USER_ID, $adminUserId);
+        return $this->setData(PostInterface::ADMIN_USER_ID, $adminUserId);
     }
 
     /**
@@ -124,7 +124,7 @@ class Post extends AbstractModel implements PostInterface
      */
     public function getCreatedAt(): ?string
     {
-        return $this->getData(self::CREATED_AT);
+        return $this->getData(PostInterface::CREATED_AT);
     }
 
     /**
@@ -132,7 +132,7 @@ class Post extends AbstractModel implements PostInterface
      */
     public function setCreatedAt(string $createdAt): PostInterface
     {
-        return $this->setData(self::CREATED_AT, $createdAt);
+        return $this->setData(PostInterface::CREATED_AT, $createdAt);
     }
 
     /**
@@ -140,7 +140,7 @@ class Post extends AbstractModel implements PostInterface
      */
     public function getUpdatedAt(): ?string
     {
-        return $this->getData(self::UPDATED_AT);
+        return $this->getData(PostInterface::UPDATED_AT);
     }
 
     /**
@@ -148,6 +148,22 @@ class Post extends AbstractModel implements PostInterface
      */
     public function setUpdatedAt(string $updatedAt): PostInterface
     {
-        return $this->setData(self::UPDATED_AT, $updatedAt);
+        return $this->setData(PostInterface::UPDATED_AT, $updatedAt);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getUrlKey(): ?string
+    {
+        return $this->getData(PostInterface::URL_KEY);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setUrlKey(string $urlKey): PostInterface
+    {
+        return $this->setData(PostInterface::URL_KEY, $urlKey);
     }
 }
